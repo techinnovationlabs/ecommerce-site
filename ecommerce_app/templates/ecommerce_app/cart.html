@@ -1,0 +1,60 @@
+{% extends 'ecommerce_app/base.html' %}
+
+
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container">
+    <div class="border rounded p-3 m-3">
+        <h1><b>Your Cart</b></h1>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr class="bg-primary">
+
+                <th>Sno.</th>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for product in products %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
+                <td>{{product.name}}</td>
+                <td>{{product.price|currency}}</td>
+                <td>{{product|cart_quantity:request.session.cart}}</td>
+                <td>{{product|price_total:request.session.cart|currency}}</td>
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+            <tr>
+                <th colspan="4"></th>
+                <th class="" colspan="">Total</th>
+
+                <th>{{products|total_cart_price:request.session.cart|currency}}</th>
+            </tr>
+
+        </table>
+
+        <div class="p-4">
+            <div class="p-6" style="margin-right:20px;">
+
+                <a href="{% url " payment" %}" class="btn btn-dark btn-lg float-right btn-sm" border rounded
+                float-right">Check out</a>
+                <a href="{% url " home" %}" class="btn btn-dark btn-lg float-left btn-sm" border rounded
+                float-right">Continue Shopping</a
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
