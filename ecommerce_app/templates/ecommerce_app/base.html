@@ -1,0 +1,97 @@
+{% load cart %}
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <title>E-store</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand text-white" style="pointer-events: none;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <form class="d-flex">
+                    <img src="https://static1.bigstockphoto.com/3/5/3/large1500/353112413.jpg" height="40" width="70">
+                </form>
+
+                <li class="nav-item active">
+                    <a style="margin-top: -20px;" class="nav-link" href="{% url " home" %}"><h5><b>Categories</b></h5>
+    </a>
+    </li>
+
+
+    {% for category in categories %}
+    <a href="/?category={{category.id}}" class="text-white" style="background: #343a40">
+        <i style="margin-top: -20px;margin-right: 15px; font-size: 27px;"></i>
+        <button class="btn btn-outline-primary btn-sm" type="submit"><b>{{category.name}}</b></button>
+    </a>
+    {% endfor %}
+
+    </ul>
+
+    <ul class=" navbar-nav my-2 my-lg-0">
+        <li class="nav-item ">
+            <a class="nav-link text-white" href="/cart">
+                <h4><span class="badge badge-light fa fa-shopping-cart" style="margin-top:5px;">{{request.session.cart.keys|length}}</span>
+                </h4>
+
+                <span class="sr-only">(current)</span></a>
+        </li>
+        {% if request.session.customer %}
+        <li class="nav-item">
+            <a class="nav-link text-white" style="margin-top:6px;" href="#"><h5><b> Hello, {{request.session.email}}</b>
+            </h5></a>
+        </li>
+
+        <li class="nav-item ">
+            <a class="nav-link text-white" style="margin-top:6px;" href="/orders"><h5><b>Orders</b></h5><span
+                    class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-white" style="margin-top:1px;" href="/logout">
+                <h5><b>
+                    <button type="button" class="btn btn-primary btn-sm">Logout
+                </b></h5>
+                <span class="sr-only">(current)</span></a></button>
+        </li>
+        {% else %}
+
+        <li class="nav-item ">
+            <a class="nav-link text-white" href="/signup"><h5><b>Signup</b></h5><span
+                    class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-white" href="/login"><h5><b>Login</b></h5><span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
+        </div>
+</nav>
+
+
+{% block content %}{% endblock %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+</div>
+
+</body>
+</html>
